@@ -1,0 +1,21 @@
+- name: Deploy Hello Gagia application
+  hosts: ubuntu_server
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Create index.html file
+      copy:
+        dest: /var/www/html/index.html
+        content: "<h1>Hello Gagia my name is santiago berrio, I am very happy studying in Gaia</h1>"
+
+    - name: Ensure Nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
